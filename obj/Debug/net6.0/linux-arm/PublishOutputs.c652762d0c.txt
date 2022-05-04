@@ -1,0 +1,17 @@
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\iot-raspi-multithreading
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\iot-raspi-multithreading.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\iot-raspi-multithreading.deps.json
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\iot-raspi-multithreading.runtimeconfig.json
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\iot-raspi-multithreading.pdb
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\Iot.Device.Bindings.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\Microsoft.Win32.SystemEvents.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\SixLabors.ImageSharp.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\System.CodeDom.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\System.Device.Gpio.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\System.Drawing.Common.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\System.IO.Ports.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\System.Management.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\System.Text.Json.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\UnitsNet.dll
+D:\Dev\IoT\RaspberryPi\Sources\iot-raspi-multithreading\bin\Debug\net6.0\linux-arm\publish\libSystem.IO.Ports.Native.so

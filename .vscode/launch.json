@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Remote Launch",
+            "type": "coreclr",
+            "request": "launch",
+            // Path to the application's executable file on the target (Raspberry Pi)
+            "program": "~/iot-raspi-multithreading/iot-raspi-multithreading",   
+            "args": [],
+            // Path to the working directory for the application
+            "cwd": "~/iot-raspi-multithreading",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceRoot}",
+                // Path to the SSH utility
+                "pipeProgram": "C:\\Windows\\System32\\OpenSSH\\ssh.exe",
+                "pipeArgs": [
+                    // username and IP address to be used to access the target using SSH
+                    "pi@192.168.1.147"  // 8GB -> "pi@192.168.1.128"   
+                ],
+                "debuggerPath": "~/vsdbg/vsdbg"
+            }
+        },
+    ]
+}

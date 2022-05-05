@@ -3,15 +3,14 @@ using System.Device.Gpio;
 
 namespace Iot.Raspi.MultiThreading
 {
-    // TaskDigitalIn implements the input from 3 buttons used to control the blinking frequency of the green 
-    // LED.
-    // The 3 buttons for 'stop blinking', 'slow blinking' and 'fast blinking' are read in and debounced by a 
-    // callback (~ interrupt handler). The callback also determines a command (stop, slow, fast) depending 
-    // on the button pressed and sends it via Channel (System.Threading.Channels.Channel<T>) to a thread 
-    // (method Loop()). 
-    // Loop() receives the command and updates the delay time (half period time) for the green LED in the 
-    // StatusPool using a delegate.
-    public class TaskDigitalIn
+    // TaskDigitalInput implements the input from 3 buttons used to control the blinking frequency of
+    // the green LED by registering a callback method for all 3 buttons and starting a thread. A press
+    // of one of the 3 buttons 'stop blinking', 'slow blinking' and 'fast blinking' starts the callback
+    // method (~ interrupt handler), which determines the command (stop, slow, fast) depending on the
+    // button pressed and sends it via a .NET Channel (System.Threading.Channels.Channel<T>) to a thread.
+    // The thread receives the command and updates the delay time (half period time) for the green LED 
+    // in the StatusPool using a delegate.
+    public class TaskDigitalInput
     {
         // Delegate type for method to be called for setting delay of green LED
         public delegate void SetDelayDelegate(TimeSpan delay);
@@ -51,7 +50,7 @@ namespace Iot.Raspi.MultiThreading
         private Thread? thread;
 
         // Ctor, private -> use static method Start().
-        private TaskDigitalIn(SetDelayDelegate setDelay)
+        private TaskDigitalInput(SetDelayDelegate setDelay)
         {
             this.setDelay = setDelay;
         }
@@ -59,9 +58,9 @@ namespace Iot.Raspi.MultiThreading
         // Create and start thread.
         // Parameters:
         // setDelay - delegate to be used for setting the LEDs delay time (half period time) in ms.
-        public static TaskDigitalIn Start(SetDelayDelegate setDelay)
+        public static TaskDigitalInput Start(SetDelayDelegate setDelay)
         {
-            var instance = new TaskDigitalIn(setDelay);
+            var instance = new TaskDigitalInput(setDelay);
             instance.thread  = new Thread(instance.Loop);
             instance.thread.Name = instance.GetType().Name;
             instance.thread.Start();

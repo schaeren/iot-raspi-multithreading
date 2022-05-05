@@ -5,14 +5,14 @@ using Iot.Device.Adc;
 
 namespace Iot.Raspi.MultiThreading
 {
-    // TaskAnalogIn implements the input from a potentiometer used to control the blinking frequency of a LED.
-    // The Start() method creates a thread which reads in the analog value (voltage from potentiometer) using
-    // a Analog-Digital-Converter (ADC), maps the value to the range minDelay..minDelay (25..1000 ms) and 
-    // updates the delay time (half period time) for the corresponding LED in the StatusPool using a delegate, 
-    // all this is executed in an endless loop.
-    // Remark: The ADC chip is connected to the Raspberry Pi via SPI (Serial Peripheral Interface), the chip
-    // supports 8 analog input channels with 10-bit resolution.
-    public class TaskAnalogIn
+    // TaskAnalogInput implements the input from a potentiometer used to control the blinking frequency
+    // of a LED. The Start() method creates a thread which reads in the analog value (voltage from
+    // potentiometer) using an Analog-Digital-Converter (ADC), maps the value to the range 
+    // minDelay...minDelay (25...1000 ms) and updates the delay time (half period time) for the 
+    // corresponding LED in the StatusPool using a delegate, All this is executed in an endless loop. 
+    // Remark: The ADC chip is connected to the Raspberry Pi via SPI (Serial Peripheral Interface), 
+    // the chip supports 8 analog input channels with 10-bit resolution.
+    public class TaskAnalogInput
     {
         // Delegate type for method to be called for setting delay of corresponding LED
         public delegate void SetDelayDelegate(TimeSpan delay);
@@ -41,7 +41,7 @@ namespace Iot.Raspi.MultiThreading
         private Thread? thread;
 
         // Ctor, private -> use static method Start().
-        private TaskAnalogIn(int analogInputChannel, SetDelayDelegate setDelay)
+        private TaskAnalogInput(int analogInputChannel, SetDelayDelegate setDelay)
         {
             this.analogInputChannel = analogInputChannel;
             this.setDelay = setDelay;
@@ -52,9 +52,9 @@ namespace Iot.Raspi.MultiThreading
         // threadName         - thread name
         // analogInputChannel - analog input channel to be used (0...7)
         // setDelay           - delegate to be used for setting the LEDs delay time (half period time) in ms.
-        public static TaskAnalogIn Start(string threadName, int analogInputChannel, SetDelayDelegate setDelay)
+        public static TaskAnalogInput Start(string threadName, int analogInputChannel, SetDelayDelegate setDelay)
         {
-            var instance = new TaskAnalogIn(analogInputChannel, setDelay);
+            var instance = new TaskAnalogInput(analogInputChannel, setDelay);
             instance.thread  = new Thread(instance.Loop);
             instance.thread.Name = threadName;
             instance.thread.Start();

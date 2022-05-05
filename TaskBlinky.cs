@@ -3,10 +3,10 @@ using System.Device.Gpio;
 
 namespace Iot.Raspi.MultiThreading
 {
-    // TaskBliky controls the blinking of one LED according to the delay read from StatusPool.
-    // The Start() method creates a thread which reads the delay time (half period time in ms) 
-    // from StatusPool using a delegate, switches the LED on or off and sleeps for the given 
-    // delay, all this is executed in an endless loop.
+    // TaskBlinky controls the blinking of one LED according to the delay read from StatusPool. The 
+    // Start() method creates a thread which reads the delay time (half period time in ms) from
+    // StatusPool using a delegate, switches the LED on or off and sleeps for the given delay, all
+    // this is executed in an endless loop.
     public class TaskBlinky
     {
         // Delegate type for method to be called for setting delay of corresponding LED

@@ -1,12 +1,11 @@
 namespace Iot.Raspi.MultiThreading
 {
-    // The StatusPool holds the current delay values for the red, yellow and green LED. The delay 
-    // value is equal to the half period time used for blinking.
-    // Access to delay values is protected by mutex, even this isn't neccessary in this case, because
-    // integer variables can be read or written in an atomic operations (without interruption by 
-    // another thread).
-    // Each time a value is changed, an EventWaitHandle is set to signal TaskLcd that a delay value 
-    // has been changed.
+    // The StatusPool encapsulates status information used by different tasks/threads. 
+    // It holds the current delay values for the red, yellow and green LEDs. A delay value is equal to 
+    // the half period time and defines the blinking frequency. The access to delay values is protected 
+    // by mutex, even this isn't neccessary in this case, because integer variables are read or written 
+    // using atomic operations (without interruption by another thread). Each time a value is changed, 
+    // an EventWaitHandle is set to signal TaskLcd that a delay value has been changed.
     public class StatusPool
     {
         // Colors of the 3 LEDs.

@@ -3,7 +3,7 @@ using System.Threading.Channels;
 namespace Iot.Raspi.MultiThreading
 {
     // AsyncLogger provides a logger whose output (to the console) is asynchronous. 
-    // That means the logger methods WriteInfoAsync() and WriteInfo() write the message 
+    // This means the logger methods WriteInfoAsync() and WriteInfo() write the messages 
     // into a .NET channel (logChannel). 
     // The Loop() method, which runs as an independent thread, reads from this channel 
     // and writes the messages to the console output.

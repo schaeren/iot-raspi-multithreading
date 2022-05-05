@@ -2,13 +2,12 @@ using Iot.Device.CharacterLcd;
 
 namespace Iot.Raspi.MultiThreading
 {
-    // TaskLcd displays the current delays for the red, yellow and green LEDs on a Liquid Cristal 
-    // Display (LCD).
-    // The Start() method creates a thread which initializes the LCD of type HD44780 with 2 lines, 
-    // each with 16 characters. 
-    // After that the thread waits for an EventWaitHandle, which is signaled by StatusPool each 
-    // time a delay has been changed. After receiving the signal the delays are read from StatusPool 
-    // and displayed on the LCD. All this is executed in an endless loop.
+    // TaskLcd displays the current delays for the red, yellow and green LEDs on a Liquid Cristal
+    // Display (LCD). The Start() method creates a thread which initializes the LCD of type HD44780
+    // with 2 lines, each with 16 characters. After the initialization the thread executes an endless
+    // loop to wait for an EventWaitHandle, which is signaled by StatusPool each time a delay has
+    // been changed. After receiving the signal the delays are read from StatusPool (using delegates)
+    // and displayed on the LCD.
     public class TaskLcd
     {
         // Delegate type for method to be called for getting delays (delays used for LED blinking)

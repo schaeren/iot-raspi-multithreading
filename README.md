@@ -13,3 +13,4 @@ Development environment: Visual Studio Code with .NET SDK 6, Visual Studio Remot
 Documentation: 
 - Introduction: https://www.schaerens.ch/raspi-software-development-with-visual-studio-code-csharp-and-net-6-debugging/
 - Demo application: https://www.schaerens.ch/raspi-multithreading-iot-application-with-net-and-c-on-raspberry-pi/
+- Setting up SSH: https://www.schaerens.ch/raspi-set-up-remote-access-with-ssh/

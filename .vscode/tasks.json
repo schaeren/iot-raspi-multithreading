@@ -1,14 +1,25 @@
+// tasks.json
 {
     "version": "2.0.0",
-    "options": {
-        "env": {
-            "PI_SSH": "pi@192.168.1.147",
+    // Read some settings from .vscode\settings.ini and define corresponding command variables.
+    // IMPORTANT: This requires the VS code extension 'Command Variable'.
+    "inputs": [
+        {
+            "id": "SSH-DESTINATION",
+            "type": "command",
+            "command": "extension.commandvariable.file.content",
+            "args": {
+                "fileName": "${workspaceFolder}\\.vscode\\settings.ini",
+                "key": "SSH-DESTINATION",
+                "default": "pi@raspberrypi.local"
+            }
         }
-    },
+    ],
+    // Task pi-build-and-deploy executes tasks pi-build, pi-mkdir, pi-deploy, pi-chmod in this sequence.
     "tasks": [
         {
             "label": "pi-build-and-deploy",
-            "dependsOn": ["pi-build","pi-mkdir", "pi-deploy", "pi-chmod"],
+            "dependsOn": ["pi-build", "pi-mkdir", "pi-deploy", "pi-chmod"],
             "dependsOrder": "sequence"
         },
         {
@@ -31,7 +42,7 @@
             "command": "powershell",
             "type": "shell",
             "args": [
-                "ssh $env:PI_SSH \"mkdir --parents ~/${workspaceFolderBasename}\""
+                "ssh '${input:SSH-DESTINATION}' \"mkdir --parents ~/${workspaceFolderBasename}\""
             ],
         },
         {
@@ -39,7 +50,7 @@
             "command": "powershell",
             "type": "process",
             "args": [
-                "$DestDir = $env:PI_SSH + ':~/' + '${workspaceFolderBasename}';",
+                "$DestDir = '${input:SSH-DESTINATION}' + ':~/' + '${workspaceFolderBasename}';",
                 "scp -r .\\bin\\Debug\\net6.0\\linux-arm\\publish\\* $DestDir"
             ],
         },
@@ -48,7 +59,7 @@
             "command": "powershell",
             "type": "shell",
             "args": [
-                "ssh $env:PI_SSH \"chmod 755 ~/${workspaceFolderBasename}/${workspaceFolderBasename}\""
+                "ssh '${input:SSH-DESTINATION}' \"chmod 755 ~/${workspaceFolderBasename}/${workspaceFolderBasename}\""
             ],
         }
     ]

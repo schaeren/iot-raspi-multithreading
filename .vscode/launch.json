@@ -1,5 +1,30 @@
+// launch.json
 {
     "version": "0.2.0",
+    // Read some settings from .vscode\settings.ini and define corresponding command variables.
+    // IMPORTANT: This requires the VS code extension 'Command Variable'.
+    "inputs": [
+        {
+            "id": "SSH-DESTINATION",
+            "type": "command",
+            "command": "extension.commandvariable.file.content",
+            "args": {
+                "fileName": "${workspaceFolder}\\.vscode\\settings.ini",
+                "key": "SSH-DESTINATION",
+                "default": "pi@raspberrypi.local"
+            }
+        },
+        {
+            "id": "SSH-COMMAND",
+            "type": "command",
+            "command": "extension.commandvariable.file.content",
+            "args": {
+                "fileName": "${workspaceFolder}\\.vscode\\settings.ini",
+                "key": "SSH-COMMAND",
+                "default": ""
+            }
+        }
+    ],
     "configurations": [
         {
             "name": "Build, deploy, launch on Pi",
@@ -16,10 +41,10 @@
             "pipeTransport": {
                 "pipeCwd": "${workspaceFolder}",
                 // Path to the SSH utility
-                "pipeProgram": "C:\\Windows\\System32\\OpenSSH\\ssh.exe",
+                "pipeProgram": "${input:SSH-COMMAND}",
                 "pipeArgs": [
-                    // username and IP address to be used to access the target using SSH
-                    "pi@192.168.1.147"  // 2GB -> "pi@192.168.1.147" / 8GB -> "pi@192.168.1.128"   
+                    // username and hostname/IP address to be used to access the target using SSH
+                    "${input:SSH-DESTINATION}"
                 ],
                 "debuggerPath": "~/vsdbg/vsdbg"
             }
@@ -37,10 +62,10 @@
             "pipeTransport": {
                 "pipeCwd": "${workspaceFolder}",
                 // Path to the SSH utility
-                "pipeProgram": "C:\\Windows\\System32\\OpenSSH\\ssh.exe",
+                "pipeProgram": "${input:SSH-COMMAND}",
                 "pipeArgs": [
-                    // username and IP address to be used to access the target using SSH
-                    "pi@192.168.1.147"  // 2GB -> "pi@192.168.1.147" / 8GB -> "pi@192.168.1.128"   
+                    // username and hostname/IP address to be used to access the target using SSH
+                    "${input:SSH-DESTINATION}" 
                 ],
                 "debuggerPath": "~/vsdbg/vsdbg"
             }

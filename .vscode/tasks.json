@@ -1,41 +1,55 @@
 {
     "version": "2.0.0",
+    "options": {
+        "env": {
+            "PI_SSH": "pi@192.168.1.147",
+        }
+    },
     "tasks": [
         {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/iot-raspi-multithread.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
+            "label": "pi-build-and-deploy",
+            "dependsOn": ["pi-build","pi-mkdir", "pi-deploy", "pi-chmod"],
+            "dependsOrder": "sequence"
         },
         {
-            "label": "publish",
+            "label": "pi-build",
             "command": "dotnet",
             "type": "process",
+            "problemMatcher": "$msCompile",
             "args": [
                 "publish",
-                "${workspaceFolder}/iot-raspi-multithread.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "--runtime",
+                "linux-arm",
+                "--no-self-contained"
             ],
-            "problemMatcher": "$msCompile"
+            "presentation": {
+                "clear": true
+            }
         },
         {
-            "label": "watch",
-            "command": "dotnet",
+            "label": "pi-mkdir",
+            "command": "powershell",
+            "type": "shell",
+            "args": [
+                "ssh $env:PI_SSH \"mkdir --parents ~/${workspaceFolderBasename}\""
+            ],
+        },
+        {
+            "label": "pi-deploy",
+            "command": "powershell",
             "type": "process",
             "args": [
-                "watch",
-                "run",
-                "--project",
-                "${workspaceFolder}/iot-raspi-multithread.csproj"
+                "$DestDir = $env:PI_SSH + ':~/' + '${workspaceFolderBasename}';",
+                "scp -r .\\bin\\Debug\\net6.0\\linux-arm\\publish\\* $DestDir"
             ],
-            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "pi-chmod",
+            "command": "powershell",
+            "type": "shell",
+            "args": [
+                "ssh $env:PI_SSH \"chmod 755 ~/${workspaceFolderBasename}/${workspaceFolderBasename}\""
+            ],
         }
     ]
 }

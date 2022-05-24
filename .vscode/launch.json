@@ -2,26 +2,48 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Remote Launch",
+            "name": "Build, deploy, launch on Pi",
             "type": "coreclr",
             "request": "launch",
+            "preLaunchTask": "pi-build-and-deploy",
             // Path to the application's executable file on the target (Raspberry Pi)
-            "program": "~/iot-raspi-multithreading/iot-raspi-multithreading",   
+            "program": "~/${workspaceFolderBasename}/${workspaceFolderBasename}",   
             "args": [],
             // Path to the working directory for the application
-            "cwd": "~/iot-raspi-multithreading",
+            "cwd": "~/${workspaceFolderBasename}",
             "stopAtEntry": false,
             "console": "internalConsole",
             "pipeTransport": {
-                "pipeCwd": "${workspaceRoot}",
+                "pipeCwd": "${workspaceFolder}",
                 // Path to the SSH utility
                 "pipeProgram": "C:\\Windows\\System32\\OpenSSH\\ssh.exe",
                 "pipeArgs": [
                     // username and IP address to be used to access the target using SSH
-                    "pi@192.168.1.147"  // 8GB -> "pi@192.168.1.128"   
+                    "pi@192.168.1.147"  // 2GB -> "pi@192.168.1.147" / 8GB -> "pi@192.168.1.128"   
                 ],
                 "debuggerPath": "~/vsdbg/vsdbg"
             }
         },
+        {
+            "name": "Launch on Pi",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "~/${workspaceFolderBasename}/${workspaceFolderBasename}",   
+            "args": [],
+            // Path to the working directory for the application
+            "cwd": "~/${workspaceFolderBasename}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                // Path to the SSH utility
+                "pipeProgram": "C:\\Windows\\System32\\OpenSSH\\ssh.exe",
+                "pipeArgs": [
+                    // username and IP address to be used to access the target using SSH
+                    "pi@192.168.1.147"  // 2GB -> "pi@192.168.1.147" / 8GB -> "pi@192.168.1.128"   
+                ],
+                "debuggerPath": "~/vsdbg/vsdbg"
+            }
+        }
     ]
 }
